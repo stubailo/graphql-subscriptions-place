@@ -12,6 +12,7 @@
     "graphql-server-express": "^0.7.0",
     "graphql-subscriptions": "^0.3.1",
     "graphql-tools": "^0.11.0",
+    "lodash": "^4.17.4",
     "meteor-node-stubs": "~0.2.4",
     "react": "^15.5.4",
     "react-apollo": "^1.0.1",

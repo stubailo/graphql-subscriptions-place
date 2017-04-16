@@ -8,60 +8,7 @@ import { Mongo } from 'meteor/mongo';
 import { property } from 'lodash';
 
 import { Canvases, Cells } from './collections';
-
-const typeDefs = `
-type Query {
-  canvas(id: ID!): Canvas!
-}
-
-type Mutation {
-  createCanvas(size: Int = 50): CreateCanvasPayload!
-  colorCell(input: ColorCellInput!): ColorCellPayload!
-}
-
-type CreateCanvasPayload {
-  canvas: Canvas!
-}
-
-input ColorCellInput {
-  id: ID!
-  newColor: ColorInput!
-}
-
-type ColorCellPayload {
-  cell: Cell!
-}
-
-type Canvas {
-  id: ID!
-  size: XYPair!
-  cells: [Cell!]!
-}
-
-type XYPair {
-  x: Int!
-  y: Int!
-}
-
-type Cell {
-  id: ID!
-  color: Color!
-  location: XYPair!
-}
-
-# Color value in RGB, values from 0-255
-type Color {
-  r: Int!
-  g: Int!
-  b: Int!
-}
-
-input ColorInput {
-  r: Int!
-  g: Int!
-  b: Int!
-}
-`;
+import typeDefs from './schema.graphql';
 
 const DEFAULT_COLOR = { r: 255, g: 255, b: 255 };
 

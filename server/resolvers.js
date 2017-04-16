@@ -1,14 +1,4 @@
-import { Meteor } from 'meteor/meteor';
-import { WebApp } from 'meteor/webapp';
-import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
-import { graphqlConnect, graphiqlConnect } from 'graphql-server-express';
-import { json } from 'body-parser';
-import { integer } from 'casual';
-import { Mongo } from 'meteor/mongo';
 import { property } from 'lodash';
-
-import { Canvases, Cells } from './collections';
-import typeDefs from './schema.graphql';
 
 const DEFAULT_COLOR = { r: 255, g: 255, b: 255 };
 
@@ -60,18 +50,4 @@ const resolvers = {
   }
 };
 
-const schema = makeExecutableSchema({ typeDefs, resolvers });
-
-WebApp.connectHandlers.use(json());
-
-WebApp.connectHandlers.use('/graphql', graphqlConnect({
-  schema,
-  context: {
-    Canvases,
-    Cells,
-  }
-}));
-
-WebApp.connectHandlers.use('/graphiql', graphiqlConnect({
-  endpointURL: Meteor.absoluteUrl('/graphql'),
-}));
+export default resolvers;

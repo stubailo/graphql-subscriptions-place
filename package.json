@@ -16,6 +16,7 @@
     "meteor-node-stubs": "~0.2.4",
     "react": "^15.5.4",
     "react-apollo": "^1.0.1",
+    "react-color": "^2.11.4",
     "react-dom": "^15.5.4",
     "subscriptions-transport-ws": "^0.5.5"
   }

@@ -2,7 +2,7 @@ import { ApolloClient, ApolloProvider, createNetworkInterface, graphql } from 'r
 import { render } from 'react-dom';
 import React from 'react';
 
-import Canvas from './imports/Canvas';
+import Main from './imports/Main';
 
 const client = new ApolloClient({
   addTypename: false,
@@ -11,7 +11,7 @@ const client = new ApolloClient({
 
 const App = () => (
   <ApolloProvider client={client}>
-    <Canvas />
+    <Main />
   </ApolloProvider>
 );
 

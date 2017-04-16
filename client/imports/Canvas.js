@@ -26,33 +26,37 @@ const ColorCellMutation = gql`
   }
 `;
 
-const Canvas = ({ data, colorCell }) => {
-  if (data.loading || data.error) { return <div />; }
+const Canvas = ({ data, colorCell, color }) => {
+  if (data.loading || data.error) {
+    return (
+      <div className="canvas-placeholder">
+        Loading...
+      </div>
+    );
+  }
 
-  const size = 5;
+  const size = 10;
 
   function onClick(event) {
     colorCell({ variables: { input: {
       id: event.target.dataset.id,
-      newColor: { r: 200, g: 150, b: 220 },
+      newColor: color,
     }}});
   }
 
   return (
-    <div>
+    <div className="canvas-content">
       {
         data.canvas.cells.map(({ id, color: {r, g, b}, location }) => (
           <div
+            className='cell'
             key={id}
             data-id={id}
             onClick={onClick}
             style={{
-              width: `${size}px`,
-              height: `${size}px`,
               backgroundColor: `rgb(${r}, ${g}, ${b})`,
               left: `${size * location.x}px`,
               top: `${size * location.y}px`,
-              position: 'absolute',
             }}>
           </div>
         ))

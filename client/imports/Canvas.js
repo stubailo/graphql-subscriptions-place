@@ -15,9 +15,9 @@ const GetCanvasQuery = gql`
   }
 `;
 
-const ColorCellMutation = gql`
-  mutation ColorCell($input: ColorCellInput!) {
-    colorCell(input: $input) {
+const UpdateCellColorMutation = gql`
+  mutation UpdateCellColor($input: UpdateCellColorInput!) {
+    updateCellColor(input: $input) {
       cell {
         id
         color { r g b }
@@ -26,7 +26,7 @@ const ColorCellMutation = gql`
   }
 `;
 
-const Canvas = ({ data, colorCell, color }) => {
+const Canvas = ({ data, updateCellColor, color }) => {
   if (data.loading || data.error) {
     return (
       <div className="canvas-placeholder">
@@ -38,7 +38,7 @@ const Canvas = ({ data, colorCell, color }) => {
   const size = 10;
 
   function onClick(event) {
-    colorCell({ variables: { input: {
+    updateCellColor({ variables: { input: {
       id: event.target.dataset.id,
       newColor: color,
     }}});
@@ -67,5 +67,5 @@ const Canvas = ({ data, colorCell, color }) => {
 
 export default compose(
   graphql(GetCanvasQuery),
-  graphql(ColorCellMutation, { name: 'colorCell' }),
+  graphql(UpdateCellColorMutation, { name: 'updateCellColor' }),
 )(Canvas);

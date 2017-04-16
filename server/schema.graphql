@@ -4,19 +4,27 @@ type Query {
 
 type Mutation {
   createCanvas(size: Int = 50): CreateCanvasPayload!
-  colorCell(input: ColorCellInput!): ColorCellPayload!
+  updateCellColor(input: UpdateCellColorInput!): UpdateCellColorPayload!
+}
+
+type Subscription {
+  cellColorChange(canvasId: ID!): CellColorChangePayload!
+}
+
+type CellColorChangePayload {
+  cell: Cell!
 }
 
 type CreateCanvasPayload {
   canvas: Canvas!
 }
 
-input ColorCellInput {
+input UpdateCellColorInput {
   id: ID!
   newColor: ColorInput!
 }
 
-type ColorCellPayload {
+type UpdateCellColorPayload {
   cell: Cell!
 }
 

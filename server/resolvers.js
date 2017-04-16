@@ -1,5 +1,7 @@
 import { property } from 'lodash';
 
+import { colorUpdateTopic } from './topics';
+
 const DEFAULT_COLOR = { r: 255, g: 255, b: 255 };
 
 const resolvers = {
@@ -31,11 +33,22 @@ const resolvers = {
         canvas: Canvases.findOne(canvasId),
       };
     },
-    colorCell(root, { input: { id, newColor }}, { Cells }) {
+    updateCellColor(root, { input: { id, newColor }}, { Cells, pubsub }) {
       Cells.update(id, { $set: { color: newColor }});
 
+      const cell = Cells.findOne(id);
+
+      pubsub.publish(colorUpdateTopic(cell.canvasId), cell);
+
       return {
-        cell: Cells.findOne(id),
+        cell,
+      };
+    }
+  },
+  Subscription: {
+    cellColorChange(cell) {
+      return {
+        cell,
       };
     }
   },
